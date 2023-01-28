@@ -1,0 +1,12 @@
+.base {
+  z-index: 1;
+  position: absolute;
+  left: 20%;
+}
+
+table {
+  border: 1px;
+}
+td {
+  padding: 10px;
+}

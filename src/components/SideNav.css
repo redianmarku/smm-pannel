@@ -1,0 +1,38 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  background-color: rgb(46, 130, 255);
+  height: 100%;
+  width: 20%;
+}
+
+.sidebar__buttons {
+  align-items: center;
+  padding: 30px;
+}
+
+.sidebar__buttons button {
+  display: block;
+  margin-bottom: 30px;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  font-weight: bolder;
+  font-size: 16px;
+  color: white;
+  background-color: rgb(46, 130, 255);
+}
+
+.sidebar__buttons button:hover {
+  cursor: pointer;
+  font-size: 16px;
+  background-color: white;
+  color: rgb(19, 129, 255);
+}
+
+.active {
+  background-color: white;
+  color: rgb(19, 129, 255);
+}

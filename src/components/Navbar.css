@@ -1,0 +1,25 @@
+.navbar {
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(216, 216, 216));
+  border-bottom: 2px;
+  border-color: grey;
+}
+
+.navbar__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.navbar__content__links a {
+  padding-right: 20px;
+  text-decoration: none;
+  color: rgb(131, 131, 131);
+  font-weight: bolder;
+}
+
+.navbar__content h2 {
+  font-size: 25px;
+  color: rgb(131, 131, 131);
+}
