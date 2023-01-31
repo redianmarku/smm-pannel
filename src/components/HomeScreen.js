@@ -1,13 +1,13 @@
 import React from "react";
 import BasePage from "./BasePage";
 import "./HomeScreen.css";
-import Navbar from "./Navbar";
+import Navigator from "./Navigator";
 import SideNav from "./SideNav";
 
 function HomeScreen() {
   return (
     <div className="homescreen">
-      <Navbar />
+      <Navigator />
       <SideNav />
       <BasePage />
     </div>

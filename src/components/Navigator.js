@@ -1,7 +1,9 @@
 import React from "react";
 import "./Navbar.css";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
 
-function Navbar() {
+function Navigator() {
   return (
     <div className="navbar">
       <div className="navbar__content">
@@ -17,4 +19,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navigator;
