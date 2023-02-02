@@ -2,32 +2,34 @@
   z-index: 1;
   position: absolute;
   left: 20%;
-  background-color: rgb(230, 230, 230);
+  background-color: white;
   margin: 10px;
   padding: 20px;
   border-radius: 10px;
 }
 
-table {
-  border: 1px;
-}
-td {
-  padding: 10px;
-}
-
 label {
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: bolder;
+  text-transform: capitalize;
+  color: #7196b1;
 }
 select {
   font-size: 15px;
   border: 0;
   padding: 10px;
-  width: 60%;
-  margin: 10px;
+  width: 100%;
+  /* margin: 10px; */
+  margin-bottom: 15px;
   border-radius: 5px;
+  background-color: #f1f7fb;
+}
+::selection {
+  color: none;
+  background: none;
 }
 .category {
-  background-color: lightgray;
+  background-color: rgb(255, 255, 255);
 }
 
 .category__selector {
@@ -37,24 +39,30 @@ select {
 }
 
 .base__category {
-  /* background-color: rgb(230, 230, 230);
-  height: 100%;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px; */
+  /* display: block; */
 }
 
 .base__fields input {
   font-size: 15px;
   border: 0;
+  background-color: #f1f7fb;
   padding: 10px;
   width: 60%;
-  margin: 10px;
+  /* margin: 10px; */
   border-radius: 5px;
+  margin-bottom: 15px;
+  width: 100%;
 }
 
 .base__field {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.quantity__label {
+  font-size: 10px;
+}
+
+.quantity__input {
 }

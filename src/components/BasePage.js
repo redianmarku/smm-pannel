@@ -8,11 +8,22 @@ const url = "https://smmpanel.net/api/v2";
 
 function BasePage() {
   const [services, setServices] = useState([]);
-  const [category, setCategory] = useState("");
-  const [service, setService] = useState();
+  const [category, setCategory] = useState("❄️🎿 Winter Sale 🎿 ❄️");
+  const [service, setService] = useState({
+    service: "2254",
+    name: "🎿 Instagram Followers [500K] ⚡️ ♻️",
+    type: "Default",
+    rate: "0.51",
+    min: "100",
+    max: "500000",
+    dripfeed: false,
+    refill: false,
+    cancel: false,
+    category: "❄️🎿 Winter Sale 🎿 ❄️",
+  });
   const [quantity, setQuantity] = useState();
   const [link, setLink] = useState();
-  const [charge, setCharge] = useState(0);
+  const [charge, setCharge] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -21,38 +32,58 @@ function BasePage() {
     }
 
     fetchData();
-  }, []);
+  }, [category]);
+
+  useEffect(() => {
+    const updateCharge = () => {
+      setCharge((service.rate / 1000) * quantity);
+    };
+    updateCharge();
+  }, [quantity]);
+
+  // useEffect(() => {
+  //   console.log(JSON.stringify(service));
+  // }, [service]);
 
   const handleChange = (e) => {
     setCategory(e.target.value);
   };
 
   const handleChange2 = (e) => {
-    setService(e.target.value);
+    services.map((service) => {
+      if (service.service == e.target.value) {
+        setService(service);
+      }
+    });
   };
-  console.log(service.name);
+
   const handleCharge = (e) => {
-    setCharge(quantity * service.rate);
+    setQuantity(e.target.value);
   };
 
   return (
     <div className="base">
-      <h1>BasePage</h1>
       <div className="base__category">
+        <label htmlFor="">KATEGORIA</label>
         <div className="category__selector">
-          <label htmlFor="">Zgjidh kategorine:</label>
           <select name="" id="" onChange={handleChange}>
             {categories.map((categorie) => (
-              <option value={categorie}>{categorie}</option>
+              <option key={categorie} value={categorie}>
+                {categorie}
+              </option>
             ))}
           </select>
         </div>
+        <label htmlFor="">SHERBIMI</label>
         <div className="category__selector">
-          <label htmlFor="">Zgjidh sherbimin:</label>
           <select name="" id="" onChange={handleChange2}>
             {services.map((service) => {
               if (service.category == category) {
-                return <option value={service}>{service.name}</option>;
+                return (
+                  <option key={service.name} value={service.service}>
+                    {service.name} Cmimi: ${service.rate}
+                  </option>
+                );
               }
             })}
             ;
@@ -60,24 +91,27 @@ function BasePage() {
         </div>
       </div>
       <div className="base__fields">
+        <label htmlFor="">LINKU</label>
         <div className="base__field">
-          <label htmlFor="">Link:</label>
           <input type="text" />
         </div>
-
+        <label>SASIA</label>
         <div className="base__field">
-          <label htmlFor="">Quantity:</label>
           <input
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={handleCharge}
             type="text"
             name="quantity"
             value={quantity}
           />
         </div>
-
+        <label>ÇMIMI</label>
         <div className="base__field">
-          <label htmlFor="">Charge:</label>
-          <input type="text" value={charge} onChange={handleCharge} />
+          <input
+            disabled
+            type="text"
+            value={`$${Math.round(charge * 100) / 100}`}
+            onChange={console.log()}
+          />
         </div>
       </div>
 
