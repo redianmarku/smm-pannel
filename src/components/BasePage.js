@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./BasePage.css";
-import instance from "../axios";
 import API_KEY from "../Requests";
 import categories from "./categories";
+import { instance_services, instance_order } from "../axios";
+import { Alert } from "@mui/material";
+import { Button } from "@material-ui/core";
+import AlertBox from "./AlertBox";
 
 const url = "https://smmpanel.net/api/v2";
 
@@ -21,13 +24,18 @@ function BasePage() {
     cancel: false,
     category: "❄️🎿 Winter Sale 🎿 ❄️",
   });
-  const [quantity, setQuantity] = useState();
-  const [link, setLink] = useState();
+  const [quantity, setQuantity] = useState(0);
+  const [link, setLink] = useState("");
   const [charge, setCharge] = useState();
+  const [alert, setAlert] = useState({});
 
   useEffect(() => {
+    const data_service = {
+      key: API_KEY,
+      action: "services",
+    };
     async function fetchData() {
-      const request = await instance.post(url, API_KEY);
+      const request = await instance_services.post(url, data_service);
       setServices(request.data);
     }
 
@@ -40,10 +48,6 @@ function BasePage() {
     };
     updateCharge();
   }, [quantity]);
-
-  // useEffect(() => {
-  //   console.log(JSON.stringify(service));
-  // }, [service]);
 
   const handleChange = (e) => {
     setCategory(e.target.value);
@@ -61,8 +65,38 @@ function BasePage() {
     setQuantity(e.target.value);
   };
 
+  const handleConfirm = async () => {
+    const data_order = {
+      key: API_KEY,
+      action: "add",
+      service: service.service,
+      link: link,
+      quantity: quantity,
+    };
+    try {
+      const request = await instance_order.post(url, data_order);
+      if (request.data.error) {
+        setAlert({ error: request.data.error });
+      } else if (request.data.order) {
+        setAlert({
+          success:
+            "Porosia tek sherbimi me ID: " +
+            request.data.order +
+            " u konfirmua!",
+        });
+        setLink("");
+        setQuantity(0);
+        setCharge();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="base">
+      <AlertBox alert={alert} setAlert={setAlert} />
+      <br />
       <div className="base__category">
         <label htmlFor="">KATEGORIA</label>
         <div className="category__selector">
@@ -81,7 +115,7 @@ function BasePage() {
               if (service.category == category) {
                 return (
                   <option key={service.name} value={service.service}>
-                    {service.name} Cmimi: ${service.rate}
+                    {service.name} - Çmimi: ${service.rate}
                   </option>
                 );
               }
@@ -93,7 +127,13 @@ function BasePage() {
       <div className="base__fields">
         <label htmlFor="">LINKU</label>
         <div className="base__field">
-          <input type="text" />
+          <input
+            value={link}
+            onChange={(e) => {
+              setLink(e.target.value);
+            }}
+            type="text"
+          />
         </div>
         <label>SASIA</label>
         <div className="base__field">
@@ -104,15 +144,28 @@ function BasePage() {
             value={quantity}
           />
         </div>
-        <label>ÇMIMI</label>
+        <label>
+          ÇMIMI
+          <div style={{ fontSize: 10 }}>
+            {quantity ? `  (cmimi per 1000 -> $${service.rate})` : ``}
+          </div>
+        </label>
         <div className="base__field">
           <input
             disabled
             type="text"
-            value={`$${Math.round(charge * 100) / 100}`}
+            value={`$${charge ? Math.round(charge * 100) / 100 : "0"}`}
             onChange={console.log()}
+            placeholder={"324"}
           />
         </div>
+        <button
+          onClick={handleConfirm}
+          className="button__submit"
+          type="submit"
+        >
+          Konfirmo
+        </button>
       </div>
 
       {/* <table border={1}>

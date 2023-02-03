@@ -8,8 +8,8 @@ function HomeScreen() {
   return (
     <div className="homescreen">
       <Navigator />
-      <SideNav />
-      <BasePage />
+      {/* <SideNav /> */}
+      {/* <BasePage /> */}
     </div>
   );
 }

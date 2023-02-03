@@ -1,0 +1,43 @@
+.button__submit {
+  font-size: 15px;
+  border: 0;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #2f82ff;
+  color: white;
+  font-weight: bolder;
+}
+.button__submit:hover {
+  cursor: pointer;
+}
+
+.alert__box {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.alert__button {
+  position: absolute;
+  right: 35px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 8px 10px 8px 10px;
+  color: black;
+  font-weight: bolder;
+  z-index: 1;
+}
+
+.alert__button :hover {
+  cursor: pointer;
+  background-color: red !important;
+}
+
+.alert__text {
+  margin: 0;
+  right: 0 !important;
+}

@@ -66,3 +66,13 @@ select {
 
 .quantity__input {
 }
+
+@media only screen and (max-width: 767px) {
+  .base {
+    background-color: white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    left: 0%;
+  }
+}
