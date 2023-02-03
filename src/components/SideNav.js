@@ -1,17 +1,39 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import "./SideNav.css";
 
 function SideNav() {
   return (
     <div className="sidebar">
       <div className="sidebar__buttons">
-        <button className="active">New Order</button>
-        <button>Services</button>
-        <button>Orders</button>
-        <button>Refill</button>
-        <button>Add Funds</button>
-        <button>API</button>
-        <button>Tickets</button>
+        <NavLink className="button_link" activeClassName="active" to="/">
+          {" "}
+          Order
+        </NavLink>
+        <NavLink
+          className="button_link"
+          activeClassName="active"
+          to="/services"
+        >
+          {" "}
+          Services
+        </NavLink>
+        <NavLink className="button_link" activeClassName="active" to="/refill">
+          {" "}
+          Refill
+        </NavLink>
+        <NavLink className="button_link" activeClassName="active" to="/funds">
+          {" "}
+          Add Funds
+        </NavLink>
+        <NavLink className="button_link" activeClassName="active" to="/api">
+          {" "}
+          API
+        </NavLink>
+        <NavLink className="button_link" activeClassName="active" to="/ticket">
+          {" "}
+          Tickets
+        </NavLink>
       </div>
     </div>
   );

@@ -1,17 +1,19 @@
 .sidebar {
-  position: fixed;
-  left: 0;
   background-color: rgb(46, 130, 255);
-  height: 100%;
-  width: 20%;
+  flex: 25%;
+  position: fixed;
+  height: 100vh;
+  width: 25%;
+  top: 60px;
 }
 
 .sidebar__buttons {
+  top: 450px;
   align-items: center;
   padding: 30px;
 }
 
-.sidebar__buttons button {
+.button_link {
   display: block;
   margin-bottom: 30px;
   width: 100%;
@@ -23,9 +25,10 @@
   font-size: 16px;
   color: white;
   background-color: rgb(46, 130, 255);
+  text-decoration: none;
 }
 
-.sidebar__buttons button:hover {
+.button_link:hover {
   cursor: pointer;
   font-size: 16px;
   background-color: white;
@@ -39,7 +42,38 @@
 
 @media only screen and (max-width: 767px) {
   .sidebar {
-    display: none;
-    width: 0;
+    position: relative;
+    width: 100%;
+    top: 65px;
+    z-index: 1;
+  }
+
+  .active {
+    background-color: red;
+    color: white;
+  }
+
+  .sidebar__buttons {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    width: 100%;
+    right: 0;
+    position: relative;
+    top: 0;
+  }
+  .button_link {
+    white-space: nowrap;
+    width: 100%;
+    font-size: 16px;
+    background-color: white;
+    color: rgb(19, 129, 255);
+    margin-left: 10px;
+    padding: 5px 5px 5px 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 10px;
   }
 }

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+export const url = "https://smmpanel.net/api/v2";
+
 const data_services = {
   key: "1894c68c3f951174844748767f8e32ea",
   action: "services",

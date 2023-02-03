@@ -1,11 +1,17 @@
 .base {
   z-index: 1;
-  position: absolute;
-  left: 20%;
   background-color: white;
   margin: 10px;
   padding: 20px;
   border-radius: 10px;
+  flex: 75%;
+  height: 100vh;
+  position: fixed;
+  top: 50px;
+  left: 25%;
+  width: 73%;
+  right: 0;
+  overflow: scroll;
 }
 
 label {
@@ -13,6 +19,7 @@ label {
   font-weight: bolder;
   text-transform: capitalize;
   color: #7196b1;
+  margin-top: 10px;
 }
 select {
   font-size: 15px;
@@ -50,7 +57,7 @@ select {
   width: 60%;
   /* margin: 10px; */
   border-radius: 5px;
-  margin-bottom: 15px;
+
   width: 100%;
 }
 
@@ -64,15 +71,19 @@ select {
   font-size: 10px;
 }
 
-.quantity__input {
-}
-
 @media only screen and (max-width: 767px) {
   .base {
     background-color: white;
     margin: 10px;
     padding: 20px;
     border-radius: 10px;
-    left: 0%;
+    flex: 75%;
+    height: 100vh;
+    position: fixed;
+    top: 120px;
+    width: 97%;
+    right: 0px;
+    left: 0;
+    margin-right: 10px;
   }
 }

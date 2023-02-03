@@ -3,3 +3,18 @@
 html {
   background-color: rgb(242, 247, 252);
 }
+
+body {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+@media only screen and (max-width: 767px) {
+  .flex {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,15 +1,18 @@
 import React from "react";
 import BasePage from "./BasePage";
 import "./HomeScreen.css";
-import Navigator from "./Navigator";
+import "bootstrap/dist/css/bootstrap.min.css";
 import SideNav from "./SideNav";
+import { NavBar } from "./Navigator";
 
 function HomeScreen() {
   return (
     <div className="homescreen">
-      <Navigator />
-      {/* <SideNav /> */}
-      {/* <BasePage /> */}
+      <NavBar />
+      <div className="flex">
+        <SideNav />
+        <BasePage />
+      </div>
     </div>
   );
 }
