@@ -7,13 +7,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  Row,
-  Col,
 } from "reactstrap";
 
 export const NavBar = () => {
