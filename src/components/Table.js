@@ -23,7 +23,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: "#f1f7fb",
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
