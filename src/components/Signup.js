@@ -4,7 +4,7 @@ import "./Signup.css";
 function Signup() {
   return (
     <div>
-      <div className="signup"></div>
+      <div className="signup">Sign Up</div>
     </div>
   );
 }
