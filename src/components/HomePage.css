@@ -12,6 +12,7 @@
 }
 .homepage__right {
   flex: 0.6;
+  margin: 20px;
 }
 
 .form__switcher {

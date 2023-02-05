@@ -11,6 +11,7 @@
   width: 73%;
   right: 0;
   overflow: scroll;
+  top: 50px;
 }
 
 label {

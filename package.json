@@ -14,7 +14,7 @@
     "autoprefixer": "^10.4.13",
     "axios": "^1.2.6",
     "bootstrap": "^5.2.3",
-    "firebase": "^9.16.0",
+    "firebase": "^9.17.1",
     "jquery": "^3.6.3",
     "popper.js": "^1.16.1",
     "postcss": "^8.4.21",

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { TextField, Button, Grid, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Login.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import db, { auth } from "../firebase";
+import { current } from "@reduxjs/toolkit";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,14 +24,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Username:", username);
-    console.log("Password:", password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((authUser) => console.log(authUser))
+      .catch((err) => console.log(err.message));
   };
 
   return (
@@ -38,11 +42,12 @@ const Login = () => {
         <form className={classes.root} onSubmit={handleSubmit}>
           <TextField
             style={{ width: "90%" }}
-            id="username"
-            label="Username"
+            id="email"
+            label="Email"
             variant="outlined"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             style={{ width: "90%" }}

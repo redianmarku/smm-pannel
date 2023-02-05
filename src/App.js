@@ -7,10 +7,13 @@ import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
 import { NavBar } from "./components/Navigator";
 import { setL, setS } from "./features/servicesSlice";
+import { loginUser, setOrder } from "./features/userSlice";
+import { auth } from "./firebase";
 import API_KEY from "./Requests";
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     const data_service = {
       key: API_KEY,
@@ -32,6 +35,22 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch(
+          loginUser({
+            uid: authUser.uid,
+            username: authUser.displayName,
+            email: authUser.email,
+          })
+        );
+      } else {
+        console.log("Loged out");
+      }
+    });
+  }, []);
+
   const user = useSelector((state) => state.data.user.user);
 
   return (
@@ -39,7 +58,7 @@ function App() {
       <Router>
         <NavBar />
         <div className={` ${user ? "app__login" : "app__logout"}`}>
-          {user ? <Dashboard /> : <HomePage />}
+          {auth.currentUser ? <Dashboard /> : <HomePage />}
         </div>
       </Router>
     </div>
