@@ -1,8 +1,6 @@
-import { combineReducers } from "redux";
-import servicesReducer from "../features/servicesReducer";
+import { combineReducers } from "@reduxjs/toolkit";
+import { servicesSlice } from "../features/servicesSlice";
 
-const rootReducer = combineReducers({
-  services: servicesReducer,
+export const rootReducer = combineReducers({
+  services: servicesSlice.reducer,
 });
-
-export default rootReducer;

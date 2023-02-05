@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { instance_services, url } from "./axios";
 import HomeScreen from "./components/HomeScreen";
-import { set } from "./features/servicesSlice";
+import { setS } from "./features/servicesSlice";
 import API_KEY from "./Requests";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     };
     async function fetchData() {
       const request = await instance_services.post(url, data_service);
-      dispatch(set(request.data));
+      dispatch(setS(request.data));
     }
 
     fetchData();

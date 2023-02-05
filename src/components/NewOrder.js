@@ -6,9 +6,10 @@ import { instance_services, instance_order } from "../axios";
 import { useEffect, useState } from "react";
 import { url } from "../axios";
 import AlertBox from "./AlertBox";
+import { selectServices, servicesSlice } from "../features/servicesSlice";
+import { useSelector } from "react-redux";
 
 function NewOrder() {
-  const [services, setServices] = useState([]);
   const [category, setCategory] = useState("❄️🎿 Winter Sale 🎿 ❄️");
   const [service, setService] = useState({
     service: "2254",
@@ -27,18 +28,7 @@ function NewOrder() {
   const [charge, setCharge] = useState();
   const [alert, setAlert] = useState({});
 
-  useEffect(() => {
-    const data_service = {
-      key: API_KEY,
-      action: "services",
-    };
-    async function fetchData() {
-      const request = await instance_services.post(url, data_service);
-      setServices(request.data);
-    }
-
-    fetchData();
-  }, [category]);
+  const services = useSelector(selectServices);
 
   useEffect(() => {
     const updateCharge = () => {

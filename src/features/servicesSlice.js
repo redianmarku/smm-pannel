@@ -1,4 +1,4 @@
-import { combineReducers, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   services: [],
@@ -8,14 +8,11 @@ export const servicesSlice = createSlice({
   name: "services",
   initialState,
   reducers: {
-    set: (state, action) => {
+    setS: (state, action) => {
       state.services = action.payload;
     },
   },
 });
 
-export const { set } = servicesSlice.actions;
-
-export const selectServices = (state) => state.services.services;
-
-export default servicesSlice.reducer;
+export const { setS } = servicesSlice.actions;
+export const selectServices = (state) => state.services.services.services;
