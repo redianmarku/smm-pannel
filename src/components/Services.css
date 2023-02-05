@@ -1,0 +1,26 @@
+.table {
+  border: 1px solid green;
+  width: 100%;
+  border-radius: 12px;
+}
+table {
+  border-radius: 5px;
+}
+
+.table__heads > th {
+  background-color: #f1f7fb;
+  border: 1px solid grey;
+  border-radius: 12px;
+}
+
+.table__datas > td {
+  border: 1px solid grey;
+  border-radius: 12px;
+}
+
+@media only screen and (max-width: 767px) {
+  .table {
+    width: 80%;
+    font-size: 12px;
+  }
+}

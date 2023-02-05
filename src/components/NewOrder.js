@@ -2,11 +2,11 @@ import React from "react";
 import "./NewOrder.css";
 import API_KEY from "../Requests";
 import categories from "./categories";
-import { instance_services, instance_order } from "../axios";
+import { instance_order } from "../axios";
 import { useEffect, useState } from "react";
 import { url } from "../axios";
 import AlertBox from "./AlertBox";
-import { selectServices, servicesSlice } from "../features/servicesSlice";
+import { selectServices } from "../features/servicesSlice";
 import { useSelector } from "react-redux";
 
 function NewOrder() {
@@ -29,6 +29,7 @@ function NewOrder() {
   const [alert, setAlert] = useState({});
 
   const services = useSelector(selectServices);
+  const isLoading = useSelector((state) => state.data.services.isLoading);
 
   useEffect(() => {
     const updateCharge = () => {
@@ -43,7 +44,7 @@ function NewOrder() {
 
   const handleChange2 = (e) => {
     services.map((service) => {
-      if (service.service == e.target.value) {
+      if (service.service === e.target.value) {
         setService(service);
       }
     });
@@ -97,15 +98,19 @@ function NewOrder() {
         <label htmlFor="">SHERBIMI</label>
         <div className="category__selector">
           <select name="" id="" onChange={handleChange2}>
-            {services.map((service) => {
-              if (service.category == category) {
-                return (
-                  <option key={service.name} value={service.service}>
-                    {service.name} - Çmimi: ${service.rate}
-                  </option>
-                );
-              }
-            })}
+            {isLoading ? (
+              <option>Duke ngarkuar...</option>
+            ) : (
+              services.map((service) => {
+                if (service.category == category) {
+                  return (
+                    <option key={service.name} value={service.service}>
+                      {service.name} - Çmimi: ${service.rate}
+                    </option>
+                  );
+                }
+              })
+            )}
             ;
           </select>
         </div>

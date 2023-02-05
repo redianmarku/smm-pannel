@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   services: [],
+  isLoading: true,
 };
 
 export const servicesSlice = createSlice({
@@ -11,8 +12,11 @@ export const servicesSlice = createSlice({
     setS: (state, action) => {
       state.services = action.payload;
     },
+    setL: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });
 
-export const { setS } = servicesSlice.actions;
-export const selectServices = (state) => state.services.services.services;
+export const { setS, setL } = servicesSlice.actions;
+export const selectServices = (state) => state.data.services.services;

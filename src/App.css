@@ -11,10 +11,22 @@ body {
 .flex {
   display: flex;
 }
+.app__logout {
+  margin-top: 60px;
+}
+.app__login {
+  margin-top: 0px;
+}
 
 @media only screen and (max-width: 767px) {
   .flex {
     display: flex;
     flex-direction: column;
+  }
+  .app__main {
+    margin-top: 0;
+  }
+  .app__logout {
+    margin-top: 60px;
   }
 }

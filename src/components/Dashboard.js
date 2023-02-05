@@ -1,14 +1,12 @@
 import React from "react";
 import BasePage from "./BasePage";
-import "./HomeScreen.css";
+import "./Dashboard.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SideNav from "./SideNav";
-import { NavBar } from "./Navigator";
 
-function HomeScreen() {
+function Dashboard() {
   return (
-    <div className="homescreen">
-      <NavBar />
+    <div className="dashboard">
       <div className="flex">
         <SideNav />
         <BasePage />
@@ -17,4 +15,4 @@ function HomeScreen() {
   );
 }
 
-export default HomeScreen;
+export default Dashboard;

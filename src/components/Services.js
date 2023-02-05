@@ -1,31 +1,27 @@
+import { CircularProgress } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectServices } from "../features/servicesSlice";
+import "./Services.css";
+import CustomizedTables from "./Table";
 
 function Services() {
   const services = useSelector(selectServices);
+  const isLoading = useSelector((state) => state.data.services.isLoading);
   return (
     <div>
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Emri Sherbimit</th>
-          <th>Çmimi per 1000</th>
-          <th>Limiti porosise</th>
-          <th>Kategoria</th>
-        </tr>
-        {services.map((service) => (
-          <tr>
-            <td>{service.service}</td>
-            <td>{service.name}</td>
-            <td>${service.rate}</td>
-            <td>
-              {service.min} - {service.max}
-            </td>
-            <td>{service.category}</td>
-          </tr>
-        ))}
-      </table>
+      {isLoading ? (
+        <CircularProgress
+          style={{
+            display: "flex",
+            alignItems: "center",
+            margin: "auto",
+            flexDirection: "column",
+          }}
+        />
+      ) : (
+        <CustomizedTables services={services} />
+      )}
     </div>
   );
 }

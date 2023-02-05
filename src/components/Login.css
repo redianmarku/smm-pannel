@@ -1,0 +1,16 @@
+.login__label {
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 70px;
+}
+
+.login {
+  margin: 20px;
+}
+
+@media (max-width: 767px) {
+  /* .login {
+    margin: 5pxpx 30px 30px 30px;
+
+  } */
+}
