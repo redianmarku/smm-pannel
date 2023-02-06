@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { TextField, Button, Grid, Box, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Signup.css";
-import { auth } from "../firebase";
+import db, { auth } from "../firebase";
+import { setDoc, doc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -34,14 +35,22 @@ const Signup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     createUserWithEmailAndPassword(auth, email, password)
       .then((authUser) => {
-        signInWithEmailAndPassword(auth, email, password).then(
-          updateProfile(auth.currentUser, { displayName: username }).then(
-            console.log(authUser.user)
+        signInWithEmailAndPassword(auth, email, password)
+          .then(
+            updateProfile(auth.currentUser, {
+              displayName: username,
+              orders: [],
+              balance: 0,
+            })
           )
-        );
+          .then(
+            setDoc(doc(db, "usersData", auth.currentUser.uid), {
+              orders: [],
+              balance: 0,
+            })
+          );
       })
       .catch((err) => console.log(err.message));
   };

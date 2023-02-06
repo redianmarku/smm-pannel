@@ -8,7 +8,7 @@ function SideNav() {
       <div className="sidebar__buttons">
         <NavLink className="button_link" activeClassName="active" to="/">
           {" "}
-          Order
+          Krijo porosi
         </NavLink>
         <NavLink
           className="button_link"
@@ -16,15 +16,15 @@ function SideNav() {
           to="/services"
         >
           {" "}
-          Services
+          Te gjitha sherbimet
         </NavLink>
         <NavLink className="button_link" activeClassName="active" to="/refill">
           {" "}
-          Refill
+          Porosite e mia
         </NavLink>
         <NavLink className="button_link" activeClassName="active" to="/funds">
           {" "}
-          Add Funds
+          Shto lek ne llogari
         </NavLink>
         <NavLink className="button_link" activeClassName="active" to="/api">
           {" "}

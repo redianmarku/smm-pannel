@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 import { url } from "../axios";
 import AlertBox from "./AlertBox";
 import { selectServices } from "../features/servicesSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import db from "../firebase";
+import { setOrder } from "../features/userSlice";
 
 function NewOrder() {
   const [category, setCategory] = useState("❄️🎿 Winter Sale 🎿 ❄️");
@@ -27,10 +30,10 @@ function NewOrder() {
   const [link, setLink] = useState("");
   const [charge, setCharge] = useState();
   const [alert, setAlert] = useState({});
-
+  const user = useSelector((state) => state.data.user.user);
   const services = useSelector(selectServices);
   const isLoading = useSelector((state) => state.data.services.isLoading);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const updateCharge = () => {
       setCharge((service.rate / 1000) * quantity);
@@ -54,6 +57,44 @@ function NewOrder() {
     setQuantity(e.target.value);
   };
 
+  // const getOrders = async () => {
+  //   const orders = null;
+  //   if (user.uid) {
+  //     const usersDataRef = doc(db, "usersData", user.uid);
+  //     const userDataSnap = await getDoc(usersDataRef);
+
+  //     orders = userDataSnap.exists().orders;
+  //   }
+  //   return orders;
+  // };
+
+  // console.log(getOrders);
+  const orders = useSelector((state) => state.data.user.orders);
+  const balance = useSelector((state) => state.data.user.balance);
+  const addOrderDB = async (serviceId, link, quantity) => {
+    await setDoc(doc(db, "usersData", user.uid), {
+      balance: balance,
+      orders: [
+        ...orders,
+        { serviceId: serviceId, quantity: quantity, link: link },
+      ],
+    });
+  };
+
+  const updateOrdersInState = async () => {
+    if (user.uid) {
+      const usersDataRef = doc(db, "usersData", user.uid);
+      const userDataSnap = await getDoc(usersDataRef);
+
+      if (userDataSnap.exists()) {
+        dispatch(setOrder(userDataSnap.data().orders));
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("Loged out !");
+      }
+    }
+  };
+
   const handleConfirm = async () => {
     const data_order = {
       key: API_KEY,
@@ -65,7 +106,9 @@ function NewOrder() {
     try {
       const request = await instance_order.post(url, data_order);
       if (request.data.error) {
-        setAlert({ error: request.data.error });
+        addOrderDB(service.service, link, quantity);
+        //setAlert({ error: request.data.error });
+        updateOrdersInState();
       } else if (request.data.order) {
         setAlert({
           success:

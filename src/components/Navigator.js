@@ -18,7 +18,7 @@ export const NavBar = () => {
   const dispatch = useDispatch();
 
   const toggle = () => setIsOpen(!isOpen);
-  const user = useSelector((state) => state.data.user.user);
+  const user = useSelector((state) => state.data.user);
 
   const handleLogout = () => {
     signOut(auth);
@@ -39,10 +39,12 @@ export const NavBar = () => {
           {user ? (
             <>
               <NavItem>
-                <NavLink href="">{user.username}</NavLink>
+                <NavLink href="">
+                  {user.user ? user.user.username : " "}
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">Balance</NavLink>
+                <NavLink href="">Balance: {user.balance}</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink onClick={handleLogout} href="">

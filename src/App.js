@@ -1,3 +1,4 @@
+import { collection, doc, getDoc } from "firebase/firestore";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -7,8 +8,13 @@ import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
 import { NavBar } from "./components/Navigator";
 import { setL, setS } from "./features/servicesSlice";
-import { loginUser, setLoading, setOrder } from "./features/userSlice";
-import { auth } from "./firebase";
+import {
+  loginUser,
+  setBalance,
+  setLoading,
+  setOrder,
+} from "./features/userSlice";
+import db, { auth } from "./firebase";
 import API_KEY from "./Requests";
 
 function App() {
@@ -37,7 +43,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch(
           loginUser({
@@ -46,15 +52,37 @@ function App() {
             email: authUser.email,
           })
         );
+        dispatch();
       } else {
         console.log("Loged out");
       }
     });
     dispatch(setLoading());
+
+    return unsubscribe;
   }, []);
 
   const user = useSelector((state) => state.data.user.user);
   const isLoading = useSelector((state) => state.data.user.isLoading);
+
+  const getData = async () => {
+    if (user.uid) {
+      const usersDataRef = doc(db, "usersData", user.uid);
+      const userDataSnap = await getDoc(usersDataRef);
+
+      if (userDataSnap.exists()) {
+        dispatch(setBalance(userDataSnap.data().balance));
+        dispatch(setOrder(userDataSnap.data().orders));
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("Loged out !");
+      }
+    }
+  };
+
+  if (auth.currentUser) {
+    getData();
+  }
 
   return (
     <div className="app">
