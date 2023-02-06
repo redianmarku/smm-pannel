@@ -1,23 +1,53 @@
 .homepage {
-  margin: 30px;
+  margin: 0px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .homepage__row1 {
   display: flex;
   flex-direction: row;
+  margin: 20px;
 }
+
 .homepage__left {
   flex: 0.4;
 }
 .homepage__right {
   flex: 0.6;
-  margin: 20px;
+  margin: 40px;
+  text-align: center;
+}
+
+.homepage__right > h1 {
+  font-weight: bolder;
+}
+
+.homepage__right > ol {
+  font-weight: bolder;
+  margin-top: 10px;
 }
 
 .form__switcher {
   text-align: center;
   margin-left: 25px;
+}
+
+#cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 500px;
+  background-image: url();
+  background-size: cover;
+  background-position: center;
+}
+
+.card {
+  width: 30%;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 @media (max-width: 767px) {

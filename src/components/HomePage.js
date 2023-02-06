@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CardsSection from "./Card";
 import "./HomePage.css";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -36,25 +37,26 @@ function HomePage() {
           </div>
         </div>
         <div className="homepage__right">
-          <p>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
-          </p>
+          <h1>Best SMM Panel for Social Media</h1>
+          Our Cheap SMM Panel is designed to help you improve your Social Media.
+          It is an effective way to generate followers, subscribers, likes,
+          views for your account. Sign-Up now! With our user-friendly platform,
+          you can easily manage and track the success of your social media
+          campaigns. From increasing brand awareness to driving website traffic,
+          we have all the tools you need to achieve your marketing goals.
+          <ol>
+            <li>1. More than 2000 different services.</li>
+
+            <li>2. Over 2 million orders delivered</li>
+
+            <li>3. Above 20000 users</li>
+          </ol>
+          Trusted for 5+ Years for Professional Social Media Automation
+          Solutions!
         </div>
       </div>
       <div className="homepage__row2">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum."
+        <CardsSection />
       </div>
     </div>
   );

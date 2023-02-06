@@ -5,6 +5,7 @@ import "./Login.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import db, { auth } from "../firebase";
 import { current } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +32,10 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then((authUser) => console.log(authUser))
+      .then((authUser) => {
+        Cookies.set("user", authUser, { expires: 7 });
+        console.log(authUser.user);
+      })
       .catch((err) => console.log(err.message));
   };
 

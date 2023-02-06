@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
 import { NavBar } from "./components/Navigator";
 import { setL, setS } from "./features/servicesSlice";
-import { loginUser, setOrder } from "./features/userSlice";
+import { loginUser, setLoading, setOrder } from "./features/userSlice";
 import { auth } from "./firebase";
 import API_KEY from "./Requests";
 
@@ -19,6 +19,7 @@ function App() {
       key: API_KEY,
       action: "services",
     };
+
     async function fetchData() {
       await instance_services
         .post(url, data_service)
@@ -49,17 +50,25 @@ function App() {
         console.log("Loged out");
       }
     });
+    dispatch(setLoading());
   }, []);
 
   const user = useSelector((state) => state.data.user.user);
+  const isLoading = useSelector((state) => state.data.user.isLoading);
 
   return (
     <div className="app">
       <Router>
-        <NavBar />
-        <div className={` ${user ? "app__login" : "app__logout"}`}>
-          {auth.currentUser ? <Dashboard /> : <HomePage />}
-        </div>
+        {isLoading ? (
+          <span class="loader"></span>
+        ) : (
+          <>
+            <NavBar />
+            <div className={` ${user ? "app__login" : "app__logout"}`}>
+              {user ? <Dashboard /> : <HomePage />}
+            </div>
+          </>
+        )}
       </Router>
     </div>
   );

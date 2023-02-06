@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   balance: 0,
   orders: [],
+  isLoading: true,
 };
 
 export const userSlice = createSlice({
@@ -22,8 +23,11 @@ export const userSlice = createSlice({
     setOrder: (state, action) => {
       state.orders = action.payload;
     },
+    setLoading: (state, action) => {
+      state.isLoading = false;
+    },
   },
 });
 
-export const { loginUser, logoutUser, setBalance, setOrder } =
+export const { loginUser, logoutUser, setBalance, setOrder, setLoading } =
   userSlice.actions;
