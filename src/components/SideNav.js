@@ -18,7 +18,11 @@ function SideNav() {
           {" "}
           Te gjitha sherbimet
         </NavLink>
-        <NavLink className="button_link" activeClassName="active" to="/refill">
+        <NavLink
+          className="button_link"
+          activeClassName="active"
+          to="/porosite"
+        >
           {" "}
           Porosite e mia
         </NavLink>

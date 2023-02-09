@@ -52,12 +52,12 @@ function App() {
             email: authUser.email,
           })
         );
-        dispatch();
+        dispatch(setLoading());
       } else {
         console.log("Loged out");
+        dispatch(setLoading());
       }
     });
-    dispatch(setLoading());
 
     return unsubscribe;
   }, []);

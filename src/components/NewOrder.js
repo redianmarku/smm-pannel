@@ -8,9 +8,16 @@ import { url } from "../axios";
 import AlertBox from "./AlertBox";
 import { selectServices } from "../features/servicesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  FieldValue,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import db from "../firebase";
 import { setOrder } from "../features/userSlice";
+import { uuidv4 } from "@firebase/util";
 
 function NewOrder() {
   const [category, setCategory] = useState("❄️🎿 Winter Sale 🎿 ❄️");
@@ -34,6 +41,7 @@ function NewOrder() {
   const services = useSelector(selectServices);
   const isLoading = useSelector((state) => state.data.services.isLoading);
   const dispatch = useDispatch();
+  const date = new Date();
   useEffect(() => {
     const updateCharge = () => {
       setCharge((service.rate / 1000) * quantity);
@@ -71,12 +79,18 @@ function NewOrder() {
   // console.log(getOrders);
   const orders = useSelector((state) => state.data.user.orders);
   const balance = useSelector((state) => state.data.user.balance);
-  const addOrderDB = async (serviceId, link, quantity) => {
+  const addOrderDB = async (orderId, serviceId, link, quantity) => {
     await setDoc(doc(db, "usersData", user.uid), {
       balance: balance,
       orders: [
         ...orders,
-        { serviceId: serviceId, quantity: quantity, link: link },
+        {
+          orderId: orderId,
+          serviceId: serviceId,
+          quantity: quantity,
+          link: link,
+          timestamp: date.toLocaleString(),
+        },
       ],
     });
   };
@@ -106,8 +120,8 @@ function NewOrder() {
     try {
       const request = await instance_order.post(url, data_order);
       if (request.data.error) {
-        addOrderDB(service.service, link, quantity);
-        //setAlert({ error: request.data.error });
+        addOrderDB(uuidv4(), service.service, link, quantity);
+        setAlert({ error: request.data.error });
         updateOrdersInState();
       } else if (request.data.order) {
         setAlert({
@@ -116,6 +130,7 @@ function NewOrder() {
             request.data.order +
             " u konfirmua!",
         });
+        addOrderDB(request.data.order, service.service, link, quantity);
         setLink("");
         setQuantity(0);
         setCharge();
@@ -126,6 +141,7 @@ function NewOrder() {
   };
   return (
     <div>
+      <h2>Krijo porosi te re</h2>
       <AlertBox alert={alert} setAlert={setAlert} />
       <div className="base__category">
         <label htmlFor="">KATEGORIA</label>

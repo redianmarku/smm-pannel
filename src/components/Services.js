@@ -10,6 +10,7 @@ function Services() {
   const isLoading = useSelector((state) => state.data.services.isLoading);
   return (
     <div>
+      <h2>Te gjitha sherbimet</h2>
       {isLoading ? (
         <CircularProgress
           style={{
