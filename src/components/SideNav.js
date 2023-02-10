@@ -26,9 +26,13 @@ function SideNav() {
           {" "}
           Porosite e mia
         </NavLink>
-        <NavLink className="button_link" activeClassName="active" to="/funds">
+        <NavLink
+          className="button_link"
+          activeClassName="active"
+          to="/shto_balance"
+        >
           {" "}
-          Shto lek ne llogari
+          Shto balance ne llogari
         </NavLink>
         <NavLink className="button_link" activeClassName="active" to="/api">
           {" "}

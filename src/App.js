@@ -13,6 +13,7 @@ import {
   setBalance,
   setLoading,
   setOrder,
+  setPayment,
 } from "./features/userSlice";
 import db, { auth } from "./firebase";
 import API_KEY from "./Requests";
@@ -73,6 +74,7 @@ function App() {
       if (userDataSnap.exists()) {
         dispatch(setBalance(userDataSnap.data().balance));
         dispatch(setOrder(userDataSnap.data().orders));
+        dispatch(setPayment(userDataSnap.data().payments));
       } else {
         // doc.data() will be undefined in this case
         console.log("Loged out !");

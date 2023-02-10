@@ -44,7 +44,7 @@ export const NavBar = () => {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">Balance: ${user.balance}</NavLink>
+                <NavLink href="">Balanca: ${user.balance.toFixed(3)}</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink onClick={handleLogout} href="">

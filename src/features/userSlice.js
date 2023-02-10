@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   balance: 0,
   orders: [],
+  payments: [],
   isLoading: true,
 };
 
@@ -23,11 +24,20 @@ export const userSlice = createSlice({
     setOrder: (state, action) => {
       state.orders = action.payload;
     },
+    setPayment: (state, action) => {
+      state.payments = action.payload;
+    },
     setLoading: (state, action) => {
       state.isLoading = false;
     },
   },
 });
 
-export const { loginUser, logoutUser, setBalance, setOrder, setLoading } =
-  userSlice.actions;
+export const {
+  loginUser,
+  logoutUser,
+  setBalance,
+  setOrder,
+  setPayment,
+  setLoading,
+} = userSlice.actions;

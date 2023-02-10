@@ -14,9 +14,10 @@ import {
   getDoc,
   serverTimestamp,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import db from "../firebase";
-import { setOrder } from "../features/userSlice";
+import { setBalance, setOrder } from "../features/userSlice";
 import { uuidv4 } from "@firebase/util";
 
 function NewOrder() {
@@ -78,10 +79,25 @@ function NewOrder() {
 
   // console.log(getOrders);
   const orders = useSelector((state) => state.data.user.orders);
-  const balance = useSelector((state) => state.data.user.balance);
+
+  const getBalance = async () => {
+    let balance = 0;
+    if (user.uid) {
+      const usersDataRef = doc(db, "usersData", user.uid);
+      const userDataSnap = await getDoc(usersDataRef);
+
+      if (userDataSnap.exists()) {
+        balance = balance + userDataSnap.data().balance;
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("Loged out !");
+      }
+    }
+    return balance;
+  };
+
   const addOrderDB = async (orderId, serviceId, link, quantity) => {
-    await setDoc(doc(db, "usersData", user.uid), {
-      balance: balance,
+    await updateDoc(doc(db, "usersData", user.uid), {
       orders: [
         ...orders,
         {
@@ -89,19 +105,21 @@ function NewOrder() {
           serviceId: serviceId,
           quantity: quantity,
           link: link,
+          charge: charge,
           timestamp: date.toLocaleString(),
         },
       ],
     });
   };
 
-  const updateOrdersInState = async () => {
+  const updateStates = async () => {
     if (user.uid) {
       const usersDataRef = doc(db, "usersData", user.uid);
       const userDataSnap = await getDoc(usersDataRef);
 
       if (userDataSnap.exists()) {
         dispatch(setOrder(userDataSnap.data().orders));
+        dispatch(setBalance(userDataSnap.data().balance));
       } else {
         // doc.data() will be undefined in this case
         console.log("Loged out !");
@@ -109,7 +127,17 @@ function NewOrder() {
     }
   };
 
-  const handleConfirm = async () => {
+  const updateBalanceDB = async (balanceMinus) => {
+    const balance = await getBalance();
+    const upadatedBalance = Number(balance) - Number(balanceMinus);
+    await updateDoc(doc(db, "usersData", user.uid), {
+      balance: upadatedBalance,
+    });
+  };
+
+  const handleConfirm = async (e) => {
+    e.preventDefault();
+    const balance = await getBalance();
     const data_order = {
       key: API_KEY,
       action: "add",
@@ -120,25 +148,38 @@ function NewOrder() {
     try {
       const request = await instance_order.post(url, data_order);
       if (request.data.error) {
-        addOrderDB(uuidv4(), service.service, link, quantity);
-        setAlert({ error: request.data.error });
-        updateOrdersInState();
+        // This if have to be set on success side
+        if (balance >= charge) {
+          updateBalanceDB(charge);
+          addOrderDB(uuidv4().substring(0, 4), service.service, link, quantity);
+        } else {
+          setAlert({ error: "Balanca juaj nuk mjafton!" });
+        }
+        // -----------------------------------------------
+
+        // setAlert({ error: request.data.error });
+        updateStates();
       } else if (request.data.order) {
-        setAlert({
-          success:
-            "Porosia tek sherbimi me ID: " +
-            request.data.order +
-            " u konfirmua!",
-        });
-        addOrderDB(request.data.order, service.service, link, quantity);
-        setLink("");
-        setQuantity(0);
-        setCharge();
+        if (balance >= charge) {
+          setAlert({
+            success:
+              "Porosia tek sherbimi me ID: " +
+              request.data.order +
+              " u konfirmua!",
+          });
+          addOrderDB(request.data.order, service.service, link, quantity);
+          setLink("");
+          setQuantity(0);
+          setCharge();
+        } else {
+          setAlert({ error: "Balanca juaj nuk mjafton!" });
+        }
       }
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <div>
       <h2>Krijo porosi te re</h2>
@@ -175,50 +216,51 @@ function NewOrder() {
         </div>
       </div>
       <div className="base__fields">
-        <label htmlFor="">LINKU</label>
-        <div className="base__field">
-          <input
-            placeholder="Vendos linkun e rrjetit social (psh. https://instagram.com/@username)"
-            value={link}
-            onChange={(e) => {
-              setLink(e.target.value);
-            }}
-            type="text"
-          />
-        </div>
-        <label>SASIA</label>
-        <div className="base__field">
-          <input
-            placeholder="Vendos sasine e followers/views ose comments."
-            onChange={handleCharge}
-            type="text"
-            name="quantity"
-            value={quantity}
-          />
-        </div>
-        <label>
-          ÇMIMI
-          <div style={{ fontSize: 10 }}>
-            {quantity ? `  (cmimi per 1000 -> $${service.rate})` : ``}
+        <form onSubmit={handleConfirm}>
+          <label htmlFor="">LINKU</label>
+          <div className="base__field">
+            <input
+              placeholder="Vendos linkun e rrjetit social (psh. https://instagram.com/@username)"
+              value={link}
+              onChange={(e) => {
+                setLink(e.target.value);
+              }}
+              type="text"
+            />
           </div>
-        </label>
-        <div className="base__field">
-          <input
-            disabled
-            type="text"
-            value={`$${charge ? Math.round(charge * 100) / 100 : "0"}`}
-            onChange={console.log()}
-            placeholder={"324"}
-          />
-        </div>
-        <button
-          onClick={handleConfirm}
-          className="button__submit"
-          type="submit"
-          style={{ marginTop: "25px" }}
-        >
-          Konfirmo
-        </button>
+          <label>SASIA</label>
+          <div className="base__field">
+            <input
+              placeholder="Vendos sasine e followers/views ose comments."
+              onChange={handleCharge}
+              type="text"
+              name="quantity"
+              value={quantity}
+            />
+          </div>
+          <label>
+            ÇMIMI
+            <div style={{ fontSize: 10 }}>
+              {quantity ? `  (cmimi per 1000 -> $${service.rate})` : ``}
+            </div>
+          </label>
+          <div className="base__field">
+            <input
+              disabled
+              type="text"
+              value={`$${charge ? Math.round(charge * 100) / 100 : "0"}`}
+              onChange={console.log()}
+              placeholder={"324"}
+            />
+          </div>
+          <button
+            className="button__submit"
+            type="submit"
+            style={{ marginTop: "25px" }}
+          >
+            Konfirmo
+          </button>
+        </form>
       </div>
     </div>
   );

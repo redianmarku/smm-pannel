@@ -49,6 +49,7 @@ const Signup = () => {
             setDoc(doc(db, "usersData", auth.currentUser.uid), {
               orders: [],
               balance: 0,
+              payments: [],
             })
           );
       })
