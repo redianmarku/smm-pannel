@@ -7,7 +7,7 @@ import { instance_services, url } from "./axios";
 import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
 import { NavBar } from "./components/Navigator";
-import { setL, setS } from "./features/servicesSlice";
+import { setC, setL, setS } from "./features/servicesSlice";
 import {
   loginUser,
   setBalance,
@@ -32,6 +32,12 @@ function App() {
         .post(url, data_service)
         .then((response) => {
           dispatch(setS(response.data));
+          // let cats = [];
+          // for (let i = 0; i < response.data.length; i++) {
+          //   cats.push(response.data[i].category);
+          // }
+          // console.log(cats);
+          // dispatch(setC(cats));
           dispatch(setL());
         })
         .catch((err) => {

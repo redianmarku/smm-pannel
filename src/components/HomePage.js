@@ -22,14 +22,22 @@ function HomePage() {
             {activeRegister === false ? (
               <p>
                 Nuk keni nje llogari ne platformen tone?{" "}
-                <button style={{ color: "blue" }} onClick={handleActive}>
+                <button
+                  id="signup"
+                  style={{ color: "blue" }}
+                  onClick={handleActive}
+                >
                   Regjistrohu
                 </button>
               </p>
             ) : (
               <p>
                 Keni nje llogari ne platformen tone?{" "}
-                <button style={{ color: "blue" }} onClick={handleDeactive}>
+                <button
+                  id="login"
+                  style={{ color: "blue" }}
+                  onClick={handleDeactive}
+                >
                   Hyr
                 </button>
               </p>

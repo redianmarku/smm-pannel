@@ -59,7 +59,9 @@ const Signup = () => {
   return (
     <Grid className="login" container justify="center">
       <Box m={5}>
-        <label className="login__label">Regjistrohu ne Platform</label>
+        <label id="signup" className="login__label">
+          Regjistrohu ne Platform
+        </label>
         <form className={classes.root} onSubmit={handleSubmit}>
           <TextField
             style={{ width: "90%" }}

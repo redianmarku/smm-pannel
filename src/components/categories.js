@@ -1,5 +1,5 @@
 const categories = [
-  "❄️🎿 Winter Sale 🎿 ❄️",
+  "🍃🌸 Spring Sale 🌸🍃",
   "🏅 Top Sales 🏅",
   "✅ Child Panel",
   "✅ Exclusive Instagram Italian Services",

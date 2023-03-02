@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  categories: [],
   services: [],
   isLoading: true,
 };
@@ -9,6 +10,9 @@ export const servicesSlice = createSlice({
   name: "services",
   initialState,
   reducers: {
+    setC: (state, action) => {
+      state.categories = action.payload;
+    },
     setS: (state, action) => {
       state.services = action.payload;
     },
@@ -18,5 +22,5 @@ export const servicesSlice = createSlice({
   },
 });
 
-export const { setS, setL } = servicesSlice.actions;
+export const { setS, setL, setC } = servicesSlice.actions;
 export const selectServices = (state) => state.data.services.services;

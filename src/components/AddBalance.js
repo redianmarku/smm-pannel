@@ -49,6 +49,7 @@ function AddBalance() {
   };
   const handleConfirm = () => {
     addBalanceDB(addbalance);
+    setaddBalance(0);
     updateState();
   };
 

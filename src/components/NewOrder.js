@@ -2,11 +2,11 @@ import React from "react";
 import "./NewOrder.css";
 import API_KEY from "../Requests";
 import categories from "./categories";
-import { instance_order } from "../axios";
+import { instance_order, instance_services } from "../axios";
 import { useEffect, useState } from "react";
 import { url } from "../axios";
 import AlertBox from "./AlertBox";
-import { selectServices } from "../features/servicesSlice";
+import { selectServices, setL, setS } from "../features/servicesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   doc,
@@ -21,19 +21,8 @@ import { setBalance, setOrder } from "../features/userSlice";
 import { uuidv4 } from "@firebase/util";
 
 function NewOrder() {
-  const [category, setCategory] = useState("❄️🎿 Winter Sale 🎿 ❄️");
-  const [service, setService] = useState({
-    service: "2254",
-    name: "🎿 Instagram Followers [500K] ⚡️ ♻️",
-    type: "Default",
-    rate: "0.51",
-    min: "100",
-    max: "500000",
-    dripfeed: false,
-    refill: false,
-    cancel: false,
-    category: "❄️🎿 Winter Sale 🎿 ❄️",
-  });
+  const [category, setCategory] = useState("🍃🌸 Spring Sale 🌸🍃");
+  const [service, setService] = useState({});
   const [quantity, setQuantity] = useState();
   const [link, setLink] = useState("");
   const [charge, setCharge] = useState();
@@ -43,6 +32,42 @@ function NewOrder() {
   const isLoading = useSelector((state) => state.data.services.isLoading);
   const dispatch = useDispatch();
   const date = new Date();
+
+  useEffect(() => {
+    const data_service = {
+      key: API_KEY,
+      action: "services",
+    };
+    async function fetchData() {
+      await instance_services
+        .post(url, data_service)
+        .then((response) => {
+          dispatch(setS(response.data));
+          dispatch(setL());
+        })
+        .catch((err) => {
+          dispatch(setL());
+          console.log(err);
+        });
+    }
+    fetchData();
+    let defaultServices = [];
+    for (let i = 0; i < services.length; i++) {
+      if (services[i].category == category) {
+        defaultServices.push(services[i]);
+      }
+    }
+    setService(defaultServices[0]);
+  }, [category]);
+
+  const handleChange2 = (e) => {
+    services.map((service) => {
+      if (service.service === e.target.value) {
+        setService(service);
+      }
+    });
+  };
+
   useEffect(() => {
     const updateCharge = () => {
       setCharge((service.rate / 1000) * quantity);
@@ -52,14 +77,7 @@ function NewOrder() {
 
   const handleChange = (e) => {
     setCategory(e.target.value);
-  };
-
-  const handleChange2 = (e) => {
-    services.map((service) => {
-      if (service.service === e.target.value) {
-        setService(service);
-      }
-    });
+    // setService(services[0]);
   };
 
   const handleCharge = (e) => {
@@ -146,34 +164,27 @@ function NewOrder() {
       quantity: quantity,
     };
     try {
-      const request = await instance_order.post(url, data_order);
-      if (request.data.error) {
-        // This if have to be set on success side
-        if (balance >= charge) {
+      if (balance > charge) {
+        const request = await instance_order.post(url, data_order);
+        if (request.data.error) {
+          setAlert({ error: request.data.error });
+          // updateStates();
+        } else if (request.data.order) {
           updateBalanceDB(charge);
           addOrderDB(uuidv4().substring(0, 4), service.service, link, quantity);
-        } else {
-          setAlert({ error: "Balanca juaj nuk mjafton!" });
-        }
-        // -----------------------------------------------
-
-        // setAlert({ error: request.data.error });
-        updateStates();
-      } else if (request.data.order) {
-        if (balance >= charge) {
           setAlert({
             success:
               "Porosia tek sherbimi me ID: " +
               request.data.order +
               " u konfirmua!",
           });
-          addOrderDB(request.data.order, service.service, link, quantity);
+          // addOrderDB(request.data.order, service.service, link, quantity);
           setLink("");
           setQuantity(0);
           setCharge();
-        } else {
-          setAlert({ error: "Balanca juaj nuk mjafton!" });
         }
+      } else {
+        setAlert({ error: "Balanca juaj nuk mjafton per kryrjen e porosise!" });
       }
     } catch (err) {
       console.log(err);

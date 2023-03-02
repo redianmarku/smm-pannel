@@ -36,7 +36,7 @@ export const NavBar = () => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
-          {user ? (
+          {user.user ? (
             <>
               <NavItem>
                 <NavLink href="">
@@ -55,10 +55,10 @@ export const NavBar = () => {
           ) : (
             <>
               <NavItem>
-                <NavLink href="">Sign In</NavLink>
+                <NavLink href="#login">Sign In</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">Sign Up</NavLink>
+                <NavLink href="#signup">Sign Up</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="">About</NavLink>
