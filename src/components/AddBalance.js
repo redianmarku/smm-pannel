@@ -7,6 +7,7 @@ import db, { auth } from "../firebase";
 import { uuidv4 } from "@firebase/util";
 import { setBalance, setPayment } from "../features/userSlice";
 import PaymentsTable from "./PaymentsTable";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function AddBalance() {
   const [method, setMethod] = useState("");
@@ -85,6 +86,34 @@ function AddBalance() {
             type="number"
           />
         </div>
+        {/* -----------paypal------------ */}
+        <PayPalScriptProvider
+          options={{
+            "client-id":
+              "AVBmboXOlmmgQX8RfIfgeOEV5mCUu9D094HnZdL-tz5w30f3IYyw9RXZ_4ZfNLS41qUOQY3S34lBE1z5",
+          }}
+        >
+          <PayPalButtons
+            createOrder={(data, actions) => {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: addbalance.toString(),
+                    },
+                  },
+                ],
+              });
+            }}
+            onApprove={(data, actions) => {
+              return actions.order.capture().then((details) => {
+                const name = details.payer.name.given_name;
+                alert(`Transaction completed by ${name}`);
+              });
+            }}
+          />
+        </PayPalScriptProvider>
+        {/* ----------------------------- */}
         <button
           onClick={handleConfirm}
           className="button__submit"
