@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,45 +29,44 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const CustomizedTableOrders = () => {
-  const orders = useSelector((state) => state.data.user.orders);
-
-  const countorder = orders.length;
+const PaymentsTable = () => {
+  const payments = useSelector((state) => state.data.user.payments);
+  const countpayments = payments.length;
 
   return (
     <>
-      {countorder == 0 ? (
-        'Ju nuk keni krijuar akoma ndonje porosi, per te krijuar porosi klikoni "Krijo Porosi" ne menu.'
+      {countpayments == 0 ? (
+        "Ju nuk keni kryer akoma asnje pagese, lista e pagesave do te shfaqet ketu."
       ) : (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell>ID e porosise</StyledTableCell>
-                <StyledTableCell>ID e Sherbimit</StyledTableCell>
-                <StyledTableCell>Linku</StyledTableCell>
+                <StyledTableCell>ID e pageses</StyledTableCell>
+                <StyledTableCell>Metoda</StyledTableCell>
                 <StyledTableCell>Sasia</StyledTableCell>
-                <StyledTableCell>Pagesa e bere</StyledTableCell>
-                <StyledTableCell>Date/Ora e krijimit</StyledTableCell>
+                <StyledTableCell>Data</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order) => (
-                <StyledTableRow key={order.orderId}>
+              {payments.map((payment) => (
+                <StyledTableRow key={payment.id}>
                   <StyledTableCell component="th" scope="row">
-                    {order.orderId}
+                    {payment.id}
                   </StyledTableCell>
-                  <StyledTableCell>{order.serviceId}</StyledTableCell>
-                  <StyledTableCell>{order.link}</StyledTableCell>
-                  <StyledTableCell>{order.quantity}</StyledTableCell>
-                  <StyledTableCell>${order.charge.toFixed(3)}</StyledTableCell>
-                  <StyledTableCell>{order.timestamp}</StyledTableCell>
+                  <StyledTableCell>{payment.method}</StyledTableCell>
+                  <StyledTableCell>${payment.amount}</StyledTableCell>
+                  <StyledTableCell>{payment.date}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       )}
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 };
@@ -76,4 +75,4 @@ const CustomizedTableOrders = () => {
 //   orders: state.orders,
 // });
 
-export default CustomizedTableOrders;
+export default PaymentsTable;

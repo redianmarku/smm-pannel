@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBg_mU1i-NGJwC1BwKK7Oqkz3P4DS7okKc",
+  apiKey: process.env.REACT_APP_FIREBASE_API,
   authDomain: "smm-pannel-14175.firebaseapp.com",
   projectId: "smm-pannel-14175",
   storageBucket: "smm-pannel-14175.appspot.com",

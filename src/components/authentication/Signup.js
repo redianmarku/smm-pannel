@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { TextField, Button, Grid, Box, Typography } from "@material-ui/core";
+import { TextField, Button, Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "./Signup.css";
-import db, { auth } from "../firebase";
+import db, { auth } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import AlertBox from "../utils/AlertBox";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +32,7 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [alert, setAlert] = useState({});
   const classes = useStyles();
 
   const handleSubmit = (event) => {
@@ -53,7 +55,28 @@ const Signup = () => {
             })
           );
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        const errorCode = err.code;
+        let errorMessage = "";
+
+        switch (errorCode) {
+          case "auth/email-already-in-use":
+            errorMessage =
+              "Ky email eshte perdorur nje here, ju lutem perdorni nje tjeter.";
+            break;
+          case "auth/invalid-email":
+            errorMessage = "Emaili nuk eshte i sakte.";
+            break;
+          case "auth/weak-password":
+            errorMessage = "Passwordi duhet te jete 6 ose me shume karaktere.";
+            break;
+          default:
+            errorMessage =
+              "Ndodhi nje gabim gjate regjistrimit, provoni me vone.";
+            break;
+        }
+        setAlert({ error: errorMessage });
+      });
   };
 
   return (
@@ -62,6 +85,7 @@ const Signup = () => {
         <label id="signup" className="login__label">
           Regjistrohu ne Platform
         </label>
+        <AlertBox alert={alert} setAlert={setAlert} />
         <form className={classes.root} onSubmit={handleSubmit}>
           <TextField
             style={{ width: "90%" }}

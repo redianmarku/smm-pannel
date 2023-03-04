@@ -1,24 +1,14 @@
 import React from "react";
 import "./NewOrder.css";
-import API_KEY from "../Requests";
-import categories from "./categories";
-import { instance_order, instance_services } from "../axios";
+import categories from "../utils/categories";
 import { useEffect, useState } from "react";
-import { url } from "../axios";
-import AlertBox from "./AlertBox";
-import { selectServices, setL, setS } from "../features/servicesSlice";
+import AlertBox from "../utils/AlertBox";
+import { selectServices, setL, setS } from "../../features/servicesSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  doc,
-  FieldValue,
-  getDoc,
-  serverTimestamp,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
-import db from "../firebase";
-import { setBalance, setOrder } from "../features/userSlice";
-import { uuidv4 } from "@firebase/util";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import db from "../../firebase";
+import { setBalance, setOrder } from "../../features/userSlice";
+import { instance_order, instance_services, url } from "../../axios";
 
 function NewOrder() {
   const [category, setCategory] = useState("🍃🌸 Spring Sale 🌸🍃");
@@ -35,7 +25,7 @@ function NewOrder() {
 
   useEffect(() => {
     const data_service = {
-      key: API_KEY,
+      key: process.env.REACT_APP_SMMPANEL_API,
       action: "services",
     };
     async function fetchData() {
@@ -157,7 +147,7 @@ function NewOrder() {
     e.preventDefault();
     const balance = await getBalance();
     const data_order = {
-      key: API_KEY,
+      key: process.env.REACT_APP_SMMPANEL_API,
       action: "add",
       service: service.service,
       link: link,
@@ -171,7 +161,7 @@ function NewOrder() {
           // updateStates();
         } else if (request.data.order) {
           updateBalanceDB(charge);
-          addOrderDB(uuidv4().substring(0, 4), service.service, link, quantity);
+          addOrderDB(request.data.order, service.service, link, quantity);
           setAlert({
             success:
               "Porosia tek sherbimi me ID: " +

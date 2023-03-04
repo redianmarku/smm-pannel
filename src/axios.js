@@ -2,17 +2,19 @@ import axios from "axios";
 
 export const url = "https://smmpanel.net/api/v2";
 
+const key = process.env.REACT_APP_SMMPANEL_API;
+
 const data_services = {
-  key: "1894c68c3f951174844748767f8e32ea",
+  key: key,
   action: "services",
 };
-const data_order = { key: "1894c68c3f951174844748767f8e32ea", action: "add" };
+const data_order = { key: key, action: "add" };
 const data_orderStatus = {
-  key: "1894c68c3f951174844748767f8e32ea",
+  key: key,
   action: "status",
 };
 const data_balance = {
-  key: "1894c68c3f951174844748767f8e32ea",
+  key: key,
   action: "balance",
 };
 

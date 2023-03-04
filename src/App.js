@@ -1,4 +1,4 @@
-import { collection, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -6,8 +6,8 @@ import "./App.css";
 import { instance_services, url } from "./axios";
 import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
-import { NavBar } from "./components/Navigator";
-import { setC, setL, setS } from "./features/servicesSlice";
+import { NavBar } from "./components/navigator/Navigator";
+import { setL, setS } from "./features/servicesSlice";
 import {
   loginUser,
   setBalance,
@@ -16,14 +16,13 @@ import {
   setPayment,
 } from "./features/userSlice";
 import db, { auth } from "./firebase";
-import API_KEY from "./Requests";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const data_service = {
-      key: API_KEY,
+      key: process.env.REACT_APP_SMMPANEL_API,
       action: "services",
     };
 

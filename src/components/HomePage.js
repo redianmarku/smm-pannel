@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CardsSection from "./Card";
+import CardsSection from "./utils/Card";
 import "./HomePage.css";
-import Login from "./Login";
-import Signup from "./Signup";
+import Login from "../components/authentication/Login";
+import Signup from "../components/authentication/Signup";
 
 function HomePage() {
   const [activeRegister, setactiveRegister] = useState(false);

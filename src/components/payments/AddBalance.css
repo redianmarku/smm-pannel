@@ -29,3 +29,12 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.paypal__section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.paypal__section > button {
+  width: 100%;
+}

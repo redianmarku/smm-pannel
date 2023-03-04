@@ -10,8 +10,8 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import { logoutUser } from "../features/userSlice";
-import { auth } from "../firebase";
+import { logoutUser } from "../../features/userSlice";
+import { auth } from "../../firebase";
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);

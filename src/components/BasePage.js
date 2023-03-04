@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./BasePage.css";
-import NewOrder from "./NewOrder";
-import AlertBox from "./AlertBox";
+import NewOrder from "./newOrder/NewOrder";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import Services from "./Services";
-import Orders from "./Orders";
-import AddBalance from "./AddBalance";
+import Services from "./allServices/Services";
+import AddBalance from "./payments/AddBalance";
+import Orders from "./userOrders/Orders";
 
 function BasePage() {
   return (
