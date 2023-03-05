@@ -31,7 +31,7 @@ export const NavBar = () => {
         style={{ fontSize: "25px", fontWeight: "bolder", color: "grey" }}
         className="navbar__title"
       >
-        SMMPannel
+        SMMAlbania
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
