@@ -45,19 +45,13 @@ function HomePage() {
           </div>
         </div>
         <div className="homepage__right">
-          <h1>Best SMM Panel for Social Media</h1>
-          Our Cheap SMM Panel is designed to help you improve your Social Media.
-          It is an effective way to generate followers, subscribers, likes,
-          views for your account. Sign-Up now! With our user-friendly platform,
-          you can easily manage and track the success of your social media
-          campaigns. From increasing brand awareness to driving website traffic,
-          we have all the tools you need to achieve your marketing goals.
+          <h1>Doni te shtoni followers ne Instagram? Jeni ne vendin e duhur</h1>
           <ol>
-            <li>1. More than 2000 different services.</li>
+            <li> More than 2000 different services.</li>
 
-            <li>2. Over 2 million orders delivered</li>
+            <li>Over 2 million orders delivered</li>
 
-            <li>3. Above 20000 users</li>
+            <li>Above 20000 users</li>
           </ol>
           Trusted for 5+ Years for Professional Social Media Automation
           Solutions!
