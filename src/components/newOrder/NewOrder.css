@@ -1,0 +1,64 @@
+.easyOrder {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f1f7fb;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 17px;
+}
+
+.easyOrder__logo {
+  width: 100px;
+}
+
+.easyOrder__title {
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.selectorIcon {
+  font-size: 2rem;
+  background-color: #9d9d9d;
+  padding: 12px;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.selectorIcon__selected {
+  background-color: #dadada;
+  color: #4b4b4b;
+}
+
+.easyOrder__selector {
+  display: flex;
+}
+
+.easyOrder__select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.easyOrder__select > span {
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.input__easy {
+  padding: 10px;
+  width: 350px;
+}
+
+.easyOrders {
+  display: flex;
+}
+
+@media screen and (max-width: 1010px) {
+  .easyOrders {
+    display: flex;
+    flex-direction: column;
+  }
+}

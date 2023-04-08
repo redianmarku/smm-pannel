@@ -12,9 +12,13 @@ import {
 } from "reactstrap";
 import { logoutUser } from "../../features/userSlice";
 import { auth } from "../../firebase";
+import { Switch } from "@material-ui/core";
+import "./Navigator.css";
+import { setAdvancedMode } from "../../features/utilsSlice";
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   const toggle = () => setIsOpen(!isOpen);
@@ -24,6 +28,8 @@ export const NavBar = () => {
     await signOut(auth);
     dispatch(logoutUser());
   };
+
+  const advMode = useSelector((state) => state.data.utils.advancedMode);
 
   return (
     <Navbar fixed="top" color="light" light expand="md">
@@ -50,6 +56,14 @@ export const NavBar = () => {
                 <NavLink onClick={handleLogout} href="">
                   Logout
                 </NavLink>
+              </NavItem>
+              <NavItem style={{ display: "flex", alignItems: "center" }}>
+                <span id="adv">Advanced mode</span>
+                <Switch
+                  checked={advMode}
+                  onChange={(e) => dispatch(setAdvancedMode(e.target.checked))}
+                  color="default"
+                />
               </NavItem>
             </>
           ) : (

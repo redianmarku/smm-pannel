@@ -1,5 +1,5 @@
 import { Alert } from "@mui/material";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./AlertBox.css";
 import { makeStyles } from "@material-ui/core/styles";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -15,6 +15,14 @@ const useStyles = makeStyles({
 });
 
 function AlertBox({ alert, setAlert }) {
+  const alertRef = useRef(null);
+
+  useEffect(() => {
+    if (alertRef.current) {
+      alertRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [alertRef]);
+
   const classes = useStyles();
   const handleButton = () => {
     setAlert({});
@@ -23,7 +31,7 @@ function AlertBox({ alert, setAlert }) {
   return (
     <div>
       {alert ? (
-        <div>
+        <div ref={alertRef}>
           {alert.error ? (
             <div className="alert__box_e">
               <div className="box__icon">
