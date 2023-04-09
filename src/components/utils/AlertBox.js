@@ -1,4 +1,3 @@
-import { Alert } from "@mui/material";
 import React, { useEffect, useRef } from "react";
 import "./AlertBox.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,7 +29,7 @@ function AlertBox({ alert, setAlert }) {
 
   return (
     <div>
-      {alert ? (
+      {alert && ( // check if alert exists
         <div ref={alertRef}>
           {alert.error ? (
             <div className="alert__box_e">
@@ -65,8 +64,6 @@ function AlertBox({ alert, setAlert }) {
             </div>
           )}
         </div>
-      ) : (
-        ""
       )}
     </div>
   );

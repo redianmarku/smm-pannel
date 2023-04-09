@@ -1,4 +1,5 @@
 const categories = [
+  "🌼🐣 Easter Holiday 🐣🌼",
   "🍃🌸 Spring Sale 🌸🍃",
   "🏅 Top Sales 🏅",
   "✅ Child Panel",

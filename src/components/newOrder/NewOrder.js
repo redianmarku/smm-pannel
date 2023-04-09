@@ -34,6 +34,14 @@ function NewOrder() {
   const date = new Date();
   const advMode = useSelector((state) => state.data.utils.advancedMode);
 
+  const alertRef = useRef(null);
+
+  useEffect(() => {
+    if (alertRef.current) {
+      alertRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [alertRef]);
+
   useEffect(() => {
     const data_service = {
       key: process.env.REACT_APP_SMMPANEL_API,
@@ -320,7 +328,10 @@ function NewOrder() {
   return (
     <div>
       <h2>Krijo porosi te re</h2>
-      <AlertBox alert={alert} setAlert={setAlert} />
+      <div ref={alertRef}>
+        <AlertBox alert={alert} setAlert={setAlert} />
+      </div>
+
       {advMode ? (
         <div className="ADV_MODE">
           <div className="base__category">
