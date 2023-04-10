@@ -11,7 +11,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import AlertBox from "../utils/AlertBox";
 
 function AddBalance() {
-  const [method, setMethod] = useState("");
+  const [method, setMethod] = useState("Paypal");
   const [addbalance, setaddBalance] = useState();
   const [alert, setAlert] = useState({});
   const user = auth.currentUser;
@@ -82,9 +82,9 @@ function AddBalance() {
             <option key={2} value="Paypal">
               Paypal
             </option>
-            <option key={3} value="Stripe">
+            {/* <option key={3} value="Stripe">
               Stripe
-            </option>
+            </option> */}
           </select>
         </div>
         <label htmlFor="">Sasia e parave qe doni te shtoni ($ dollar) </label>

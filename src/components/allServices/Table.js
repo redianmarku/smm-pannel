@@ -37,7 +37,7 @@ export default function CustomizedTables({ services }) {
             <TableRow>
               <StyledTableCell>ID</StyledTableCell>
               <StyledTableCell>Emri Sherbimit</StyledTableCell>
-              <StyledTableCell>Cmimi per 100</StyledTableCell>
+              <StyledTableCell>Çmimi per 1000</StyledTableCell>
               <StyledTableCell>Limiti Porosise</StyledTableCell>
               <StyledTableCell>Kategoria</StyledTableCell>
             </TableRow>

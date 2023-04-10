@@ -37,7 +37,7 @@ export const NavBar = () => {
         style={{ fontSize: "25px", fontWeight: "bolder", color: "grey" }}
         className="navbar__title"
       >
-        SMMAlbania
+        <img width={200} src={process.env.PUBLIC_URL + "/logo.png"} alt="" />
       </NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
@@ -46,19 +46,21 @@ export const NavBar = () => {
             <>
               <NavItem>
                 <NavLink href="">
-                  {user.user ? user.user.username : " "}
+                  👋 Miresevini {user.user ? user.user.username : " "}
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">Balanca: ${user.balance.toFixed(3)}</NavLink>
+                <NavLink href="">
+                  🤑 Balanca: ${user.balance.toFixed(3)}
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink onClick={handleLogout} href="">
-                  Logout
+                  📤 Logout
                 </NavLink>
               </NavItem>
               <NavItem style={{ display: "flex", alignItems: "center" }}>
-                <span id="adv">Advanced mode</span>
+                <span id="adv">Shaq te gjitha sherbimet 👉</span>
                 <Switch
                   checked={advMode}
                   onChange={(e) => dispatch(setAdvancedMode(e.target.checked))}
@@ -69,13 +71,13 @@ export const NavBar = () => {
           ) : (
             <>
               <NavItem>
-                <NavLink href="#login">Sign In</NavLink>
+                <NavLink href="#login">📥 Sign In</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#signup">Sign Up</NavLink>
+                <NavLink href="#signup">💁‍♂️ Sign Up</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">About</NavLink>
+                <NavLink href="">𝍕 About</NavLink>
               </NavItem>
             </>
           )}

@@ -8,23 +8,16 @@ function SideNav() {
       <div className="sidebar__buttons">
         <NavLink className="button_link" activeClassName="active" to="/">
           {" "}
-          Krijo porosi
+          🚀 Krijo porosi
         </NavLink>
-        <NavLink
-          className="button_link"
-          activeClassName="active"
-          to="/services"
-        >
-          {" "}
-          Te gjitha sherbimet
-        </NavLink>
+
         <NavLink
           className="button_link"
           activeClassName="active"
           to="/porosite"
         >
           {" "}
-          Porosite e mia
+          🚗 Porosite e mia
         </NavLink>
         <NavLink
           className="button_link"
@@ -32,16 +25,24 @@ function SideNav() {
           to="/shto_balance"
         >
           {" "}
-          Shto balance ne llogari
+          💸 Shto balance ne llogari
         </NavLink>
-        <NavLink className="button_link" activeClassName="active" to="/api">
+        <NavLink
+          className="button_link"
+          activeClassName="active"
+          to="/services"
+        >
+          {" "}
+          👨‍🔧 Te gjitha sherbimet
+        </NavLink>
+        {/* <NavLink className="button_link" activeClassName="active" to="/api">
           {" "}
           API
         </NavLink>
         <NavLink className="button_link" activeClassName="active" to="/ticket">
           {" "}
           Tickets
-        </NavLink>
+        </NavLink> */}
       </div>
     </div>
   );

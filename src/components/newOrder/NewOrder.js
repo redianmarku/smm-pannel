@@ -11,6 +11,7 @@ import { setBalance, setOrder } from "../../features/userSlice";
 import { instance_order, instance_services, url } from "../../axios";
 import NewOrderEasy from "./newOrderEasy/NewOrderEasy";
 import { Favorite, PeopleAlt } from "@material-ui/icons";
+import { cmimi } from "../../cmimi";
 
 function NewOrder() {
   const [category, setCategory] = useState("🍃🌸 Spring Sale 🌸🍃");
@@ -79,19 +80,19 @@ function NewOrder() {
 
   useEffect(() => {
     const updateCharge = () => {
-      setCharge((service.rate / 1000) * quantity);
+      setCharge(((parseFloat(service.rate) + cmimi) / 1000) * quantity);
       let Irate = 0;
       if (Iselector == "followers") {
-        Irate = 0.41;
+        Irate = 0.41 + cmimi;
       } else {
-        Irate = 0.13;
+        Irate = 0.13 + cmimi;
       }
 
       let Trate = 0;
       if (Tselector == "followers") {
-        Trate = 2.24;
+        Trate = 2.24 + cmimi;
       } else {
-        Trate = 0.4;
+        Trate = 0.4 + cmimi;
       }
       setTCharge((Trate / 1000) * quantity);
       setECharge((Irate / 1000) * quantity);
@@ -355,7 +356,8 @@ function NewOrder() {
                     if (service.category == category) {
                       return (
                         <option key={service.name} value={service.service}>
-                          {service.name} - Çmimi: ${service.rate}
+                          {service.name} - Çmimi: $
+                          {parseFloat(service.rate) + cmimi}
                         </option>
                       );
                     }
@@ -391,7 +393,11 @@ function NewOrder() {
               <label>
                 ÇMIMI
                 <div style={{ fontSize: 10 }}>
-                  {quantity ? `  (cmimi per 1000 -> $${service.rate})` : ``}
+                  {quantity
+                    ? `  (Çmimi per 1000 -> $${
+                        parseFloat(service.rate) + cmimi
+                      })`
+                    : ``}
                 </div>
               </label>
               <div className="base__field">
@@ -508,7 +514,9 @@ function NewOrder() {
                       <div style={{ fontSize: 10 }}>
                         {quantity
                           ? `  (Çmimi per 1000 -> $${
-                              Iselector === "followers" ? "0.41" : "0.13"
+                              Iselector === "followers"
+                                ? parseFloat("0.41") + cmimi
+                                : parseFloat("0.13") + cmimi
                             })`
                           : ``}
                       </div>
@@ -626,7 +634,9 @@ function NewOrder() {
                       <div style={{ fontSize: 10 }}>
                         {quantity
                           ? `  (Çmimi per 1000 -> $${
-                              Tselector === "followers" ? "2.24" : "0.40"
+                              Tselector === "followers"
+                                ? parseFloat("2.24") + cmimi
+                                : parseFloat("0.40") + cmimi
                             })`
                           : ``}
                       </div>

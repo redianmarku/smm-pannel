@@ -6,6 +6,7 @@
   border-radius: 10px;
   padding: 10px;
   margin: 17px;
+  transition: all 0.3s ease-in-out;
 }
 
 .easyOrder__logo {
@@ -61,4 +62,8 @@
     display: flex;
     flex-direction: column;
   }
+}
+
+.easyOrder__form {
+  transition: all 0.3s ease-in-out;
 }
