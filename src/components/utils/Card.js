@@ -23,6 +23,7 @@ const CardsSection = () => {
     <section
       id="cards"
       ref={cardsRef}
+      className="cards_section"
       style={{
         margin: 0,
         width: "100%",
@@ -39,24 +40,30 @@ const CardsSection = () => {
       }}
     >
       <div className="card">
-        <h3>Card 1</h3>
+        <h3>Pse duhet të provoni panelin tonë SMM</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
-          euismod odio, gravida pellentesque urna varius vitae.
+          <b>Çmimet më të ulëta:</b> Ne ofrojmë çmimet më të ulëta që fillon nga
+          $ 0.001.
+          <br />
+          <b>Lehtë për t'u përdorur:</b> Paneli ynë SMM është i lehtë për t'u
+          përdorur, me një ndërfaqe miqësore për përdoruesit.
         </p>
       </div>
       <div className="card">
-        <h3>Card 2</h3>
+        <h3> Dërgim më i shpejtë</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
-          euismod odio, gravida pellentesque urna varius vitae.
+          <b>Përpunimi</b> i porosive me shpejtësi dhe efikasitet. <br />
+          <b>Pagesa e sigurt</b>: Ne ofrojmë pagesa të sigurta përmes PayPal ose
+          metoda të tjera.
         </p>
       </div>
       <div className="card">
-        <h3>Card 3</h3>
+        <h3>Shumëllojshmëri e shërbimeve</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
-          euismod odio, gravida pellentesque urna varius vitae.
+          <b>Gama</b> e gjerë e shërbimeve, si pëlqime, ndjekës, shikime dhe më
+          shumë. <br />
+          <b>Shërbim cilësor:</b>
+          Ne mundohemi të sigurojmë 100% kënaqësi të klientit.
         </p>
       </div>
     </section>

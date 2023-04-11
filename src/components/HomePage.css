@@ -54,4 +54,54 @@
   .homepage__row1 {
     flex-direction: column;
   }
+  .cards_section {
+    flex-direction: column;
+  }
+  .card {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+.fancy-footer {
+  background-color: #1ca2f1;
+  color: #fff;
+  padding: 50px 0;
+  margin-top: 200px;
+}
+
+.fancy-footer h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.fancy-footer p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.fancy-footer h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.fancy-footer ul.contact-info {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fancy-footer ul.contact-info li {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.fancy-footer ul.contact-info li i {
+  font-size: 24px;
+  margin-right: 10px;
 }
