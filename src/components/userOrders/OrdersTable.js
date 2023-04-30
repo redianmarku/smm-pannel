@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useSelector } from "react-redux";
-import { instance_order, url } from "../../axios";
+import { instance_order, instance_orderStatus, url } from "../../axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,7 +47,7 @@ const CustomizedTableOrders = () => {
       order: orderId,
     };
 
-    const request = await instance_order.post(url, data_order);
+    const request = await instance_orderStatus.post("/", data_order);
     status = request.data.status;
     remains = request.data.remains;
 

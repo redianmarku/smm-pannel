@@ -50,7 +50,7 @@ function NewOrder() {
     };
     async function fetchData() {
       await instance_services
-        .post(url, data_service)
+        .post("/", data_service)
         .then((response) => {
           dispatch(setS(response.data));
           dispatch(setL());
@@ -190,7 +190,7 @@ function NewOrder() {
     };
     try {
       if (balance > charge) {
-        const request = await instance_order.post(url, data_order);
+        const request = await instance_order.post("/", data_order);
         if (request.data.error) {
           setAlert({ error: request.data.error });
           // updateStates();
@@ -245,7 +245,7 @@ function NewOrder() {
           data_order = data_orderL;
         }
 
-        const request = await instance_order.post(url, data_order);
+        const request = await instance_order.post("/", data_order);
         if (request.data.error) {
           setAlert({ error: request.data.error });
           // updateStates();
@@ -300,7 +300,7 @@ function NewOrder() {
           data_order = data_orderL;
         }
 
-        const request = await instance_order.post(url, data_order);
+        const request = await instance_order.post("/", data_order);
         if (request.data.error) {
           setAlert({ error: request.data.error });
           // updateStates();

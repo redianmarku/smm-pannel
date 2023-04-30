@@ -28,7 +28,7 @@ function App() {
 
     async function fetchData() {
       await instance_services
-        .post(url, data_service)
+        .post("/", data_service)
         .then((response) => {
           dispatch(setS(response.data));
           // let cats = [];
